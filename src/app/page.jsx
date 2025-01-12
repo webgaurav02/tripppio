@@ -1,20 +1,50 @@
 'use client'
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
 
 import hero_img from "../../public/images/hero_img.jpg"
 
 export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
+  const router = useRouter();
+
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      // Define the scope of suggestions
+      componentRestrictions: { country: "in" },
+    },
+    debounce: 300,
+  });
+
+  useEffect(()=> {
+    console.log(data)
+  }, [data])
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
       console.log(`Searching for destination: ${searchTerm}`);
-      // Implement your search logic here
+      router.push(`/search/${searchTerm}`)
     }
   }
+
+  const handleSelect = ({ description, place_id }) => () => {
+    setValue(description, false);
+    setSearchTerm(place_id);
+    clearSuggestions();
+  };
 
   const testimonials = [
     {
@@ -98,35 +128,48 @@ export default function Home() {
         <div className="relative z-10 text-center">
           <h1 className="text-5xl font-bold">Streamline Your Travel Plans</h1>
           <p className="mt-4 text-lg">Discover homestays and curated travel packages tailored just for you.</p>
-          {/* <button className="mt-6 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded text-white">Get Started</button> */}
-          <form onSubmit={handleSearch} className="mt-6 flex justify-center">
+          <form onSubmit={handleSearch} className="relative mt-6 flex justify-center">
             <input
               type="text"
               placeholder="Search for a destination..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full max-w-md text-text px-4 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:scale-105das transition-all duration-300 focus:ring-2 focus:ring-primary"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              disabled={!ready}
+              className="w-full max-w-md text-black px-4 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:scale-105das transition-all duration-300"
             />
             <button
               type="submit"
-              className="bg-accent text-white px-6 py-2 rounded-r-full font-semibold hover:bg-blue-700"
+              className="bg-black text-white px-6 py-2 rounded-r-full font-semibold hover:bg-blue-700"
             >
               Search
             </button>
+            {status === "OK" && (
+              <ul className="absolute left-0 top-10 w-full mt-2 bg-background bg-opacity-80 text-text rounded shadow-xl z-50">
+                {data.map((suggestion) => (
+                  <li
+                    key={suggestion.place_id}
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-900"
+                    onClick={handleSelect(suggestion)}
+                  >
+                    {suggestion.description}
+                  </li>
+                ))}
+              </ul>
+            )}
           </form>
         </div>
 
       </section>
 
       {/* Popular Destinations Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-background">
         <h2 className="text-3xl font-bold text-center mb-8">Popular Destinations</h2>
         <div className="flex overflow-x-auto scrollbar-hide">
           {popularDestinations.map((destination, index) => (
             <div
               key={index}
               className="mx-5 relative min-w-[250px] h-96 rounded-lg overflow-hidden shadow-[rgba(0, 0, 0, 0.9)_0px_4px_12px] group"
-              >
+            >
               <Image
                 src={destination.image}
                 alt={`${destination.city}, ${destination.country}`}
@@ -145,8 +188,8 @@ export default function Home() {
 
 
       {/* Testimonials Section */}
-      <section className="py-16 px-6 bg-blue-50">
-        <h2 className="text-3xl font-bold text-center mb-8">What Our Users Say</h2>
+      <section className="py-16 px-6 bg-background">
+        <h2 className="text-3xl text-text font-bold text-center mb-8">What Our Users Say</h2>
         <div className="flex items-center justify-center">
           <button
             onClick={() => setCurrentTestimonial((currentTestimonial - 1 + testimonials.length) % testimonials.length)}
@@ -154,7 +197,7 @@ export default function Home() {
           >
             &larr;
           </button>
-          <div className="max-w-md text-center">
+          <div className="max-w-md text-center bg-cards py-20 px-10 rounded-lg">
             <Image
               src={testimonials[currentTestimonial].image}
               alt={testimonials[currentTestimonial].name}

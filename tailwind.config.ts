@@ -11,12 +11,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        'text': '#0c141c',
-        'background': '#f2f6fb',
-        'primary': '#2878d8',
-        'secondary': '#80b5f4',
-        'accent': '#3892fd',
-        'cards': '#ebf0f9'
+        'text': '#eaecf3',
+        'background': '#080a13',
+        'primary': '#97a6e0',
+        'secondary': '#1c3595',
+        'accent': '#264feb',
+        'cards': '#2f394f'
        },
        fontFamily: {
         bungee: ['Bungee', 'cursive'],

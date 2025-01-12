@@ -34,7 +34,7 @@ const Navbar: FC = () => {
   }
 
   return (
-    <nav className="fixed left-0 top-0 z-50 w-screen bg-black p-4 border-b border-text">
+    <nav className="fixed left-0 top-0 z-50 w-screen bg-black p-4 ">
       <div className="md:max-w-full max-w-7xl mx-auto flex justify-between items-center">
         <Link href="/" className={`text-white text-2xl font-black uppercase`}>Tripppio</Link>
 
