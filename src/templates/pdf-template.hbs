@@ -1,0 +1,64 @@
+<!-- pdf-template.hbs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        padding: 20px;
+      }
+      .header {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .content {
+        margin-bottom: 20px;
+      }
+      .content table {
+        width: 100%;
+        margin: 10px 0;
+      }
+      .content table td {
+        padding: 8px;
+        border: 1px solid #ddd;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 30px;
+      }
+      .qr-code {
+        text-align: center;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Booking Confirmation</h1>
+      </div>
+
+      <div class="content">
+        <p><strong>Name:</strong> {{name}}</p>
+        <p><strong>Booking ID:</strong> {{bookingId}}</p>
+        <p><strong>Event:</strong> {{eventName}}</p>
+        <p><strong>Date:</strong> {{eventDate}}</p>
+        <p><strong>Seats:</strong> {{seats}}</p>
+        <p><strong>Total Amount:</strong> ₹{{totalAmount}}</p>
+      </div>
+
+      <div class="qr-code">
+        <img src="{{qrCodeUrl}}" alt="QR Code" />
+      </div>
+
+      <div class="footer">
+        <p>For any questions, please contact us at support@example.com</p>
+      </div>
+    </div>
+  </body>
+</html>

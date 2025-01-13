@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 // Package schema for each homestay package
 const PackageSchema = new mongoose.Schema({
+    id: { type: Number, unique: true, required: true },
     price: { type: Number, required: true },
     details: { type: String, required: true },
     roomType: { type: String, required: true },

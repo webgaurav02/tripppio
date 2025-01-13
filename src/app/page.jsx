@@ -8,6 +8,7 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 
 import hero_img from "../../public/images/hero_img.jpg"
+import Link from 'next/link';
 
 export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -66,51 +67,61 @@ export default function Home() {
       city: 'Meghalaya',
       country: 'India',
       image: 'https://ychef.files.bbci.co.uk/1280x720/p0gjrxd9.jpg',
+      link: 'ChIJfyC9NI9-UDcRK4iPEPctSGI',
     },
     {
       city: 'Leh',
       country: 'Ladakh, India',
       image: 'https://hblimg.mmtcdn.com/content/hubble/img/leh/mmt/destination/m_leh-landscape_l_400_640.jpg',
+      link: 'ChIJhe1fRCHr_TgREPeGUJcJu9E'
     },
     {
       city: 'Manali',
       country: 'Himachal Pradesh, India',
       image: 'https://hblimg.mmtcdn.com/content/hubble/img/manali/mmt/destination/m_Landscape_l_400_640.jpg',
+      link: 'ChIJP9A_FgiHBDkRzXZQvg6oKYE'
     },
     {
       city: 'Pondicherry',
       country: 'India',
       image: 'https://hblimg.mmtcdn.com/content/hubble/img/pondicherry/mmt/destination/m_destination-pondicherry-landscape_l_400_640.jpg',
+      link: 'ChIJz89JjqthUzoRTrDw0ibTa8w'
     },
     {
       city: 'Goa',
       country: 'India',
       image: 'https://hblimg.mmtcdn.com/content/hubble/img/goa/mmt/destination/m_destination-goa-landscape_l_400_640.jpg',
+      link: 'ChIJQbc2YxC6vzsRkkDzYv-H-Oo'
     },
     {
       city: 'Havelock Island',
       country: 'Andamans, India',
       image: 'https://hblimg.mmtcdn.com/content/hubble/img/havelock/mmt/destination/m_destination_havelock_landscape_l_400_640.jpg',
+      link: 'ChIJOeAPXtjTiDARv_Q-UaqqyCU'
     },
     {
       city: 'Gokarna',
       country: 'Karnataka, India',
       image: 'https://hblimg.mmtcdn.com/content/hubble/img/gokarna/mmt/destination/m_destination_gokarna_landscape_l_400_640.jpg',
+      link: 'ChIJcUwKW9aDvjsRwEG7dtCf4Ok'
     },
     {
       city: 'Srinagar',
       country: 'India',
       image: 'https://hblimg.mmtcdn.com/content/hubble/img/srinagar/mmt/destination/m_landscape_l_400_640.jpg',
+      link: 'ChIJhe1fRCHr_TgREPeGUJcJu9E'
     },
     {
       city: 'Alleppy',
       country: 'Kerala, India',
       image: 'https://hblimg.mmtcdn.com/content/hubble/img/alleppey/mmt/destination/m_destination-alleppey-landscape_l_400_640.jpg',
+      link: 'ChIJhe1fRCHr_TgREPeGUJcJu9E'
     },
     {
       city: 'Ooty',
       country: 'Tamil Nadu, India',
       image: 'https://hblimg.mmtcdn.com/content/hubble/img/ooty/mmt/destination/m_Ooty_activity_mountains_l_368_613.jpg',
+      link: 'ChIJhe1fRCHr_TgREPeGUJcJu9E'
     },
   ];
 
@@ -166,7 +177,8 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-center mb-8">Popular Destinations</h2>
         <div className="flex overflow-x-auto scrollbar-hide">
           {popularDestinations.map((destination, index) => (
-            <div
+            <Link
+              href={`/search/${destination.link}`}
               key={index}
               className="mx-5 relative min-w-[250px] h-96 rounded-lg overflow-hidden shadow-[rgba(0, 0, 0, 0.9)_0px_4px_12px] group"
             >
@@ -181,7 +193,7 @@ export default function Home() {
                 <h3 className="text-lg font-bold">{destination.city}</h3>
                 <p className="text-sm">{destination.country}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>

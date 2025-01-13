@@ -1,0 +1,66 @@
+<!-- email-template.hbs -->
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .header {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+      .content {
+        margin: 20px;
+        padding: 10px;
+      }
+      .footer {
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Booking Confirmation</h1>
+    </div>
+    
+    <div class="content">
+      <p>Dear {{name}},</p>
+      <p>Thank you for booking with us! Your booking details are as follows:</p>
+      
+      <table>
+        <tr>
+          <td><strong>Booking ID:</strong></td>
+          <td>{{bookingId}}</td>
+        </tr>
+        <tr>
+          <td><strong>Event:</strong></td>
+          <td>{{eventName}}</td>
+        </tr>
+        <tr>
+          <td><strong>Date:</strong></td>
+          <td>{{eventDate}}</td>
+        </tr>
+        <tr>
+          <td><strong>Seats:</strong></td>
+          <td>{{seats}}</td>
+        </tr>
+        <tr>
+          <td><strong>Total Amount:</strong></td>
+          <td>₹{{totalAmount}}</td>
+        </tr>
+      </table>
+
+      <p>Please find the QR code for your booking below:</p>
+      <img src="{{qrCodeUrl}}" alt="QR Code" />
+    </div>
+
+    <div class="footer">
+      <p>For any questions, feel free to contact our support team at support@example.com.</p>
+    </div>
+  </body>
+</html>

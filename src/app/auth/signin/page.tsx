@@ -3,7 +3,7 @@
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 //React buttons
 import {
@@ -33,13 +33,21 @@ export default function SignIn() {
   const { status } = useSession();
   const router = useRouter();
 
+  const searchParams = useSearchParams();
+  
+  // Extract the 'package' query parameter
+  const packageId = searchParams.get('booking');
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (status === "authenticated") {
-      router.push('/');
+      if(packageId)
+        router.push(`/package/${packageId}`);
+      else
+        router.push('/')
     }
   }, [status, router]);
 

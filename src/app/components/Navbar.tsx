@@ -66,6 +66,13 @@ const Navbar: FC = () => {
                     <p>Hi! <b>{session.user.name?.split(' ')[0]}</b></p>
                     <hr className=" h-[0.1px] border-text w-full my-2"/>
                     <Link
+                      href="/dashboard"
+                      className="block hover:text-accent transition-colors"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                    <Link
                       href="/account"
                       className="block hover:text-accent transition-colors"
                       onClick={() => setDropdownOpen(false)}
