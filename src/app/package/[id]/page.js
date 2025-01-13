@@ -80,7 +80,7 @@ const PackageDetails = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                     <div className="mb-6">
                         <h2 className="text-2xl font-semibold mb-4">Images</h2>
-                        {/* <Slider {...settings}>
+                        <Slider {...settings}>
                             {packageData.images.map((image, index) => (
                                 <div key={index} className="flex justify-center">
                                     <Image
@@ -92,7 +92,7 @@ const PackageDetails = () => {
                                     />
                                 </div>
                             ))}
-                        </Slider> */}
+                        </Slider>
                     </div>
 
                     <div className="mb-6 md:pl-10">
